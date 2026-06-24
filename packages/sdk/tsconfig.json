@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../types" },
+    { "path": "../utils" },
+    { "path": "../core" },
+    { "path": "../parser" },
+    { "path": "../serializer" },
+    { "path": "../validator" },
+    { "path": "../renderer-html" },
+    { "path": "../plugin-core-components" }
+  ]
+}

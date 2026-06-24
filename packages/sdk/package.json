@@ -1,0 +1,38 @@
+{
+  "name": "@jaroslava/sdk",
+  "version": "0.1.0",
+  "description": "Convenience entry point for the Jaroslava SDK: parse(), serialize(), validate(), renderHtml(), bundled with the standard component plugin set. Use the underlying packages directly for fine-grained control.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "clean": "rimraf dist *.tsbuildinfo",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@jaroslava/types": "workspace:*",
+    "@jaroslava/utils": "workspace:*",
+    "@jaroslava/core": "workspace:*",
+    "@jaroslava/parser": "workspace:*",
+    "@jaroslava/serializer": "workspace:*",
+    "@jaroslava/validator": "workspace:*",
+    "@jaroslava/renderer-html": "workspace:*",
+    "@jaroslava/plugin-core-components": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "rimraf": "^5.0.0",
+    "vitest": "^1.6.0"
+  }
+}

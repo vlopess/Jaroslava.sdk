@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.turbo/
+.changeset/*.md
+!.changeset/README.md
+.DS_Store
+*.log
+coverage/
+docs/
+.turbo
+examples/

@@ -1,0 +1,33 @@
+{
+  "name": "@jaroslava/validator",
+  "version": "0.1.0",
+  "description": "Schema and structural validation for the Jaroslava AST. Dispatches to per-component plugin validators; contains no hardcoded component knowledge.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "clean": "rimraf dist *.tsbuildinfo",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@jaroslava/types": "workspace:*",
+    "@jaroslava/utils": "workspace:*",
+    "@jaroslava/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "rimraf": "^5.0.0",
+    "vitest": "^1.6.0"
+  }
+}
