@@ -13,8 +13,6 @@ export interface Result<T> {
 }
 
 export interface ParseOptions {
-  /** Language/grammar version to parse against. Defaults to latest known. */
-  languageVersion?: string;
   /** Indentation unit width in spaces, used for diagnostics only (parser tolerates both). */
   indentSize?: number;
   /** When true, unknown components produce a warning instead of an error and

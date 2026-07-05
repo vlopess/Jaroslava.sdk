@@ -4,8 +4,6 @@ import { generateId } from "@jaroslava/utils";
 import { tokenizeLines } from "./lexer.js";
 import { buildDocuments } from "./builder.js";
 
-const DEFAULT_AST_VERSION = "1.0.0";
-const DEFAULT_LANGUAGE_VERSION = "1.0.0";
 
 /**
  * Parses Jaroslava source text into an AST.
@@ -31,14 +29,11 @@ export function parse(
     const documents = buildDocuments(lines, {
       registry,
       generateId,
-      astVersion: DEFAULT_AST_VERSION,
       diagnostics,
       tolerateUnknownComponents: options.tolerateUnknownComponents ?? true,
     });
 
     const ast: JaroAst = {
-      astVersion: DEFAULT_AST_VERSION,
-      languageVersion: options.languageVersion ?? DEFAULT_LANGUAGE_VERSION,
       documents,
       diagnostics,
     };

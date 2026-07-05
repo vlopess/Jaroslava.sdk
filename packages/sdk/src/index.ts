@@ -1,7 +1,7 @@
 export { Jaroslava } from "./jaroslava.js";
 
 export * from "@jaroslava/types";
-export { PluginRegistry, JaroslavaContext, createRegistry, CURRENT_AST_VERSION, CURRENT_LANGUAGE_VERSION } from "@jaroslava/core";
+export { PluginRegistry, JaroslavaContext, createRegistry } from "@jaroslava/core";
 export { parse } from "@jaroslava/parser";
 export { serialize } from "@jaroslava/serializer";
 export { validate } from "@jaroslava/validator";

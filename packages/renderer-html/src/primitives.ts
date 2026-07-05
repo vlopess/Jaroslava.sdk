@@ -7,13 +7,13 @@ import type { AnyNode, RenderOutput } from "@jaroslava/types";
  */
 export function renderPrimitive(node: AnyNode, renderNode: (n: AnyNode) => RenderOutput): RenderOutput {
   switch (node.type) {
-    case "Text":
+    case "Text": 
       return { html: `<p class="jaro-text">${escapeHtml(node.value)}</p>` };
 
     case "Link": {
       const href = node.internal ? `#${node.href.replace(/^id:/, "")}` : node.href;
       const label = node.label ?? href;
-      return { html: `<a class="jaro-link" href="${escapeAttr(href)}">${escapeHtml(label)}</a>` };
+      return { html: `<a class="jaro-link" target="_blank" href="${includeProtocol(escapeAttr(href))}">${escapeHtml(label)}</a>` };
     }
 
     case "Call": {
@@ -47,4 +47,9 @@ export function escapeHtml(value: string): string {
 
 export function escapeAttr(value: string): string {
   return value.replace(/"/g, "&quot;");
+}
+
+
+export function includeProtocol(value: string) {
+  return value.startsWith("https://") ? value : "https://" + value;
 }

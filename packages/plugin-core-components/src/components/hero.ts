@@ -17,9 +17,13 @@ export const heroComponent: ComponentDefinition = {
       html: [
         `<section class="jaro-hero"${anchor}>`,
         `  <h2 class="jaro-hero-heading">${heading}</h2>`,
-        `  <div class="jaro-hero-body">${renderedChildren}</div>`,
+        renderedChildren ? `  <div class="jaro-hero-body">${renderedChildren}</div>` : "",
         `</section>`,
       ].join("\n"),
+      css: [
+        ".jaro-hero {margin-bottom: 3rem;}",
+        ".jaro-hero-heading {font-size: 1.1rem; font-weight: 700; color: var(--text);}"
+      ]
     };
   },
 };

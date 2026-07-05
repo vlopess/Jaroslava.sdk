@@ -24,7 +24,6 @@ export const listComponent: ComponentDefinition = {
       if (!line.includes("->")) return null;
       return parseInline(line, {
         generateId: ctx.generateId,
-        version: "1.0.0",
       });
     },
   },
@@ -34,9 +33,13 @@ export const listComponent: ComponentDefinition = {
     return {
       html: `<ul class="jaro-list jaro-list-${direction}">\n${rows}\n</ul>`,
       css: [
-        ".jaro-list { list-style: none; padding: 0; display: flex; gap: 0.75rem; margin: 0; }",
-        ".jaro-list-column { flex-direction: column; }",
+        ".jaro-list { list-style: none; padding: 0; display: flex; gap: 0.75rem; margin: 0; flex-wrap: wrap; justify-content: center; margin-bottom: 10px;}",
+        ".jaro-list-column {flex-direction: column;}",
         ".jaro-list-row { flex-direction: row; }",
+        ".jaro-list-item {  transition: transform 0.3s ease; display: flex; align-items: center; justify-content: space-between; height: 48px; border: 1px solid var(--line); border-radius: 12px; background: var(--line);font-size: 0.82rem; color: #DDD; padding: 0 15px 0 10px; outline: none;transition: border-color .2s;}",
+        ".jaro-list-item:hover {transform: scale(1.1);}",
+        ".jaro-list-item img {height: 75%; margin: 5px;border-radius: 8px;}",
+        ""
       ],
     };
   },

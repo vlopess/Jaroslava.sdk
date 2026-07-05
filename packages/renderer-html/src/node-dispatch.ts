@@ -13,7 +13,7 @@ export interface DispatchDeps {
  * children first (components receive their children pre-rendered, per the
  * ComponentRenderHook contract in @jaroslava/types).
  */
-export function renderNode(node: AnyNode, deps: DispatchDeps): RenderOutput {
+export function renderNode(node: AnyNode, deps: DispatchDeps): RenderOutput {  
   if (node.type !== "Component" && node.type !== "Document") {
     return renderPrimitive(node, (n) => renderNode(n, deps));
   }

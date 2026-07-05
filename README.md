@@ -29,7 +29,7 @@ Jaroslava ecosystem — editors, previews, exports, all build on top of it.
 |---|---|
 | [`@jaroslava/types`](./packages/types) | AST node shapes + plugin contracts |
 | [`@jaroslava/utils`](./packages/utils) | AST traversal, id/string helpers, inline parser |
-| [`@jaroslava/core`](./packages/core) | Plugin registry, context, AST migrations |
+| [`@jaroslava/core`](./packages/core) | Plugin registry, context |
 | [`@jaroslava/parser`](./packages/parser) | `.jaro` source → AST |
 | [`@jaroslava/serializer`](./packages/serializer) | AST → standardized `.jaro` source |
 | [`@jaroslava/validator`](./packages/validator) | AST → validation diagnostics |

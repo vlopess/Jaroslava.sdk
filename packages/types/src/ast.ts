@@ -1,24 +1,3 @@
-/**
- * ============================================================================
- * Jaroslava AST — Node Definitions
- * ============================================================================
- *
- * The AST is the single source of truth of the entire Jaroslava ecosystem.
- * It is intentionally *generic*: the schema itself has no knowledge of
- * `@page`, `@hero`, `@card`, etc. Those are component *kinds* contributed by
- * plugins (see `plugin.ts`). This file defines only the shape that every
- * node — built-in or third-party — must conform to.
- *
- * Design goals:
- *  - Serializable to/from JSON (no class instances, no functions, no cycles).
- *  - Stable across language versions via `astVersion` + node-level `version`.
- *  - Walkable generically (renderers/validators never need a switch over
- *    every possible component kind — they dispatch through the plugin
- *    registry instead, see @jaroslava/core).
- */
-
-/** Semver-ish string identifying the AST schema shape itself. */
-export type AstSchemaVersion = string;
 
 /**
  * A source location, used for diagnostics, source maps, and round-trip
@@ -80,7 +59,7 @@ export type JaroNodeType =
   | "Text"
   /** A link expression: `-> "url"` or `Label -> "url"`. */
   | "Link"
-  /** An inline call expression like img("link.com") or @("name"). */
+  /** An inline call expression like img("link.com"). */
   | "Call"
   /** A code block, e.g. `@code bash`. Modeled as a distinct type because
    *  its content is raw/verbatim rather than parsed prose or children. */
@@ -96,12 +75,6 @@ export interface BaseNode {
   /** Stable, unique identifier for this node within the AST (UUID v4 or ULID). */
   id: string;
   type: JaroNodeType;
-  /**
-   * Schema version this individual node conforms to. Normally equal to the
-   * document's astVersion, but kept per-node so that partial migrations
-   * (e.g. a copy-pasted node from an older doc) remain detectable.
-   */
-  version: AstSchemaVersion;
   span?: SourceSpan;
   /**
    * Free-form bag for plugin- or tool-specific metadata that should NOT
@@ -156,7 +129,6 @@ export interface LinkNode extends BaseNode {
 
 export interface CallNode extends BaseNode {
   type: "Call";
-  /** Callee name, e.g. "img" or the component name inside `@("name")`. */
   callee: string;
   args: JaroAttributeValue[];
 }
@@ -189,9 +161,6 @@ export type AnyNode =
  * so the root holds an ordered list of DocumentNodes rather than one.
  */
 export interface JaroAst {
-  astVersion: AstSchemaVersion;
-  /** Identifier for the language/grammar version the source was parsed with. */
-  languageVersion: string;
   documents: DocumentNode[];
   /** Non-fatal issues collected during parsing (unknown components, etc). */
   diagnostics: Diagnostic[];

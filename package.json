@@ -1,7 +1,7 @@
 {
   "name": "jaroslava-sdk",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
   "description": "Monorepo for the Jaroslava SDK — parsing, transforming, validating, serializing and rendering the Jaroslava markup language.",
   "license": "MIT",
   "packageManager": "pnpm@9.0.0",

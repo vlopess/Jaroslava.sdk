@@ -19,23 +19,24 @@ export const postComponent: ComponentDefinition = {
   },
   render(node, renderedChildren) {
     const title = String(node.attrs.title ?? "");
-    const date = node.attrs.date ? String(node.attrs.date) : undefined;
+    const date = node.attrs.date ? String(node.attrs.date) : '';
     const tags = splitTags(node.attrs.tags);
     const html = [
       `<article class="jaro-post">`,
+      `  <span class="jaro-post-meta">${formatDate(date)} · ${tags.map((t) => `${String(t).trim()}`).join(" · ")}</span>`,
       `  <h2 class="jaro-post-title">${title}</h2>`,
-      date ? `  <time class="jaro-post-date" datetime="${date}">${date}</time>` : "",
-      tags.length
-        ? `  <ul class="jaro-post-tags">${tags
-            .map((t) => `<li>${String(t).trim()}</li>`)
-            .join("")}</ul>`
-        : "",
-      `  <div class="jaro-post-body">${renderedChildren}</div>`,
+      `  <div class="jaro-post-body">${renderedChildren}</div>`, 
       `</article>`,
     ]
       .filter(Boolean)
       .join("\n");
-    return { html };
+
+    const css = [
+      ".jaro-post {margin-bottom: 2rem;}",
+      ".jaro-post-meta {font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem;}",
+      ".jaro-post-title {font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem;}",
+    ];
+    return { html, css };
   },
 };
 
@@ -54,4 +55,16 @@ function splitTags(value: unknown): string[] {
       .filter(Boolean);
   }
   return [];
+}
+
+function formatDate(dateStr : string): string {
+  if(dateStr == "") return "";
+
+  const date = new Date(dateStr);
+
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }).replace(',', '');
 }

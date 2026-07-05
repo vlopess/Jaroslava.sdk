@@ -4,7 +4,7 @@
  * ============================================================================
  *
  * Every component in the language — `@page`, `@list`, `@hero`, `@card`,
- * `@code`, custom user components declared via `@("name")`, and any future
+ * `@code` and any future
  * third-party component — is registered through these contracts. Nothing
  * about a specific component is hardcoded into core/parser/validator/
  * renderer-html. Those packages only know how to:
@@ -165,7 +165,6 @@ export interface ComponentDefinition {
 export interface JaroslavaPlugin {
   /** npm-package-style unique name, e.g. "@jaroslava/plugin-core-components". */
   name: string;
-  version: string;
   components?: ComponentDefinition[];
   /** Document- or AST-wide validators not scoped to a single component kind. */
   globalValidators?: GlobalValidator[];

@@ -22,7 +22,6 @@ import { codeComponent } from "./components/code.js";
  */
 export const coreComponentsPlugin: JaroslavaPlugin = {
   name: "@jaroslava/plugin-core-components",
-  version: "0.1.0",
   components: [
     pageComponent,
     profileComponent,

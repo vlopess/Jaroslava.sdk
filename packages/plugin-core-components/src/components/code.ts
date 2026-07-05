@@ -20,17 +20,12 @@ export const codeComponent: ComponentDefinition = {
     return {
       html: [
         `<div class="jaro-code-block">`,
-        `  <button class="jaro-code-copy" data-copy>Copy</button>`,
         `  <pre><code${langClass}>${escapeHtml(code)}</code></pre>`,
         `</div>`,
       ].join("\n"),
       css: [
-        ".jaro-code-block { background: #0C0C0B; border: 0.5px solid var(--line); border-radius: 3px; padding: 0.5rem 0.75rem; font-size: 0.75rem; color: #8BAD6B; margin-bottom: 0.6rem; font-family: 'JetBrains Mono', monospace;}",
-        ".jaro-code-copy { position: absolute; top: 0.5rem; right: 0.5rem; }",
-      ],
-      head: [
-        `<script>document.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', () => { navigator.clipboard.writeText(btn.nextElementSibling.textContent || ''); }));</script>`,
-      ],
+        ".jaro-code-block { background: var(--jaro-code-bg); border: 0.5px solid var(--line); border-radius: 3px; padding: 0.5rem 0.75rem; font-size: 0.75rem; color: var(--jaro-code); margin-bottom: 0.6rem; font-family: 'JetBrains Mono', monospace;}",
+      ]
     };
   },
   serialize(node, ctx) {

@@ -16,7 +16,6 @@ const COMPONENT_RE = /^@(\*|[A-Za-z][A-Za-z0-9_-]*)(?:\(("([^"]*)")\))?(?:\s+(.*
 export interface BuildContext {
   registry: PluginRegistry;
   generateId: () => string;
-  astVersion: string;
   diagnostics: Diagnostic[];
   tolerateUnknownComponents: boolean;
 }
@@ -58,7 +57,6 @@ export function buildDocuments(lines: RawLine[], ctx: BuildContext): DocumentNod
             id: ctx.generateId(),
             type: "Component",
             kind: "page",
-            version: ctx.astVersion,
             attrs: {},
             children: [],
           },
@@ -86,7 +84,6 @@ function componentToDocument(node: ComponentNode, ctx: BuildContext): DocumentNo
     id: node.id,
     type: "Document",
     kind: node.kind,
-    version: node.version,
     attrs: node.attrs,
     children: node.children,
     span: node.span,
@@ -113,16 +110,12 @@ function buildComponentSubtree(
     throw new Error(`Internal parser error: expected component header at line ${header.lineNumber}`);
   }
   const [, kindRaw, , literalName, remainder] = match;
-  // `@("name")` declares a custom-named component instance of kind "*",
-  // resolved by plugins that register kind "*" as a catch-all, or treated
-  // as kind = the literal name itself if no catch-all plugin is present.
   const kind = kindRaw === "*" && literalName ? literalName : (kindRaw ?? "unknown");
 
   const node: ComponentNode = {
     id: ctx.generateId(),
     type: "Component",
     kind,
-    version: ctx.astVersion,
     attrs: {},
     children: [],
     span: lineSpan(header),
@@ -200,7 +193,6 @@ function buildComponentSubtree(
     // Otherwise: prose / inline content line.
     const inlineNode = parseInline(line.content, {
       generateId: ctx.generateId,
-      version: ctx.astVersion,
     });
     node.children.push(inlineNode);
     i++;
@@ -228,7 +220,6 @@ function consumeCodeBlock(
   const node: CodeBlockNode = {
     id: ctx.generateId(),
     type: "CodeBlock",
-    version: ctx.astVersion,
     language,
     code: codeLines.join("\n"),
   };

@@ -15,20 +15,32 @@ export const profileComponent: ComponentDefinition = {
     const name = String(node.attrs.name ?? "");
     const role = String(node.attrs.role ?? "");
     const avatar = String(node.attrs.avatar ?? "");
+
     const html = [
       `<section class="jaro-profile">`,
-      avatar ? `  <img class="jaro-avatar" src="${avatar}" alt="${name}" />` : "",
+      avatar
+        ? `  <img class="jaro-avatar" src="${avatar}" alt="${name}" />`
+        : `  <div class="jaro-avatar">${getInicials(name)}</div>`,
       `  <h1 class="jaro-profile-name">${name}</h1>`,
       role ? `  <p class="jaro-profile-role">${role}</p>` : "",
       `</section>`,
     ]
       .filter(Boolean)
       .join("\n");
+
     return {
       html,
       css: [
-        ".jaro-avatar { border-radius: 50%; width: 96px; height: 96px; object-fit: cover; }",
-      ],
+        ".jaro-profile { display:flex; flex-direction:column; align-items:center; text-align:center; padding:4rem 1.5rem; }",
+        ".jaro-avatar { display: flex; justify-content: center; align-items: center; width:88px; height:88px; border-radius:50%; object-fit:cover; border:2px solid var(--line); margin-bottom:1.5rem; color: white; font-size: xx-large;}",
+        ".jaro-profile-name { margin:0; font-size:2rem; font-weight:400; line-height:1.2; color:var(--jaro-text,#fff); }",
+        ".jaro-profile-role { margin-top:0.5rem; margin-bottom:0; font-size:0.875rem; color:var(--muted); letter-spacing:0.08em; }",
+      ]
     };
-  },
+  }
 };
+
+export function getInicials(value: string) {
+  if(value.trim() === "") return "";
+  return `${value.split(" ")?.at(0)?.at(0)?.toUpperCase()}${value.split(" ")?.at(1)?.at(0)?.toUpperCase()}`;
+}

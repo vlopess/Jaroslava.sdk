@@ -2,14 +2,12 @@ import type { AnyNode, CallNode, InlineGroupNode, LinkNode, TextNode } from "@ja
 
 export interface InlineParseDeps {
   generateId: () => string;
-  version: string;
 }
 
 /**
  * Parses one inline content line into a sequence of AnyNode, handling:
  *   - `Label -> "url"`            => LinkNode
  *   - `img("link.com")`            => CallNode
- *   - `@("name")`                  => CallNode (callee "@")
  *   - `a + b + c`                  => InlineGroupNode of the parsed parts
  *   - plain prose                  => TextNode
  *
@@ -25,7 +23,6 @@ export function parseInline(text: string, deps: InlineParseDeps): AnyNode {
   const group: InlineGroupNode = {
     id: deps.generateId(),
     type: "InlineGroup",
-    version: deps.version,
     items,
   };
   return group;
@@ -65,7 +62,6 @@ function parseInlineAtom(atom: string, deps: InlineParseDeps): AnyNode {
     const link: LinkNode = {
       id: deps.generateId(),
       type: "Link",
-      version: deps.version,
       label: label ? label : undefined,
       href: href ?? "",
       internal: (href ?? "").startsWith("id:"),
@@ -79,7 +75,6 @@ function parseInlineAtom(atom: string, deps: InlineParseDeps): AnyNode {
     const call: CallNode = {
       id: deps.generateId(),
       type: "Call",
-      version: deps.version,
       callee: callee ?? "",
       args: parseArgs(argsRaw ?? ""),
     };
@@ -89,7 +84,6 @@ function parseInlineAtom(atom: string, deps: InlineParseDeps): AnyNode {
   const text: TextNode = {
     id: deps.generateId(),
     type: "Text",
-    version: deps.version,
     value: atom,
   };
   return text;
