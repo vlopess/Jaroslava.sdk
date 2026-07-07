@@ -41,8 +41,7 @@ Jaroslava ecosystem — editors, previews, exports, all build on top of it.
 ## Getting started
 
 ```bash
-pnpm install
-pnpm build
+npm i @jaroslava/sdk
 ```
 
 ## Quick usage
