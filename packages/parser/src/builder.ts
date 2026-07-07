@@ -154,8 +154,11 @@ function buildComponentSubtree(
       i++;
       continue;
     }
+    if(i > 47) {
+      console.log("");
+    }
 
-    if (isComponentLine(line.content)) {
+    if (isComponentLine(line.content) && kind !== "code") {
       const child = buildComponentSubtree(lines, i, ctx);
       node.children.push(child.node);
       i = child.nextIndex;
@@ -214,7 +217,7 @@ function consumeCodeBlock(
       ? ctxLanguageHintFor(lines, startIndex - 1)
       : undefined;
   while (i < lines.length && lines[i]!.depth >= bodyDepth) {
-    codeLines.push(lines[i]!.content);
+    codeLines.push("  ".repeat(lines[i]!.depth - 1) + lines[i]!.content);
     i++;
   }
   const node: CodeBlockNode = {
@@ -232,6 +235,7 @@ function ctxLanguageHintFor(lines: RawLine[], headerIndex: number): string | und
   const match = header.content.match(/^@code\s+(\S+)$/);
   return match?.[1];
 }
+
 
 /**
  * An attribute line's key must look like a single identifier-style token

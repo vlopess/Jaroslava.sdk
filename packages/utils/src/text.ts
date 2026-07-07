@@ -21,8 +21,10 @@ export function isBlank(line: string): boolean {
 export function splitKeyValue(line: string): { key: string; value: string } | undefined {
   const idx = findTopLevelColon(line);
   if (idx === -1) return undefined;
+  const key = line.slice(0, idx).trim();
+  if(key.charAt(0).toUpperCase() === key.charAt(0)) return undefined;
   return {
-    key: line.slice(0, idx).trim(),
+    key: key,
     value: line.slice(idx + 1).trim(),
   };
 }

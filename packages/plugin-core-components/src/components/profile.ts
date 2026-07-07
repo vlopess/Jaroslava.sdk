@@ -20,7 +20,7 @@ export const profileComponent: ComponentDefinition = {
       `<section class="jaro-profile">`,
       avatar
         ? `  <img class="jaro-avatar" src="${avatar}" alt="${name}" />`
-        : `  <div class="jaro-avatar">${getInicials(name)}</div>`,
+        : `  <div class="jaro-avatar">${getInitials(name)}</div>`,
       `  <h1 class="jaro-profile-name">${name}</h1>`,
       role ? `  <p class="jaro-profile-role">${role}</p>` : "",
       `</section>`,
@@ -40,7 +40,9 @@ export const profileComponent: ComponentDefinition = {
   }
 };
 
-export function getInicials(value: string) {
+export function getInitials(value: string) {
   if(value.trim() === "") return "";
-  return `${value.split(" ")?.at(0)?.at(0)?.toUpperCase()}${value.split(" ")?.at(1)?.at(0)?.toUpperCase()}`;
+  return value.split(" ").map((n) => n[0]).filter((_, index) => index < 2).join("").toUpperCase();
 }
+
+
