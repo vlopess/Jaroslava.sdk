@@ -1,6 +1,6 @@
 {
   "name": "@jaroslava/renderer-html",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Renders the Jaroslava AST to HTML + CSS. Dispatches per-component rendering to plugins; framework-agnostic, works in Node and the browser (SSR/SSG-ready).",
   "license": "MIT",
   "type": "module",
@@ -12,7 +12,9 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
@@ -29,5 +31,8 @@
     "typescript": "^5.5.0",
     "rimraf": "^5.0.0",
     "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

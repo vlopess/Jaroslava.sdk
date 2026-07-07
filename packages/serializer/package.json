@@ -1,6 +1,6 @@
 {
   "name": "@jaroslava/serializer",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Reconstructs standardized, formatted .jaro source text from a Jaroslava AST. Plugin-aware: components with custom inline syntax can override the generic serialization.",
   "license": "MIT",
   "type": "module",
@@ -12,7 +12,9 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
@@ -29,5 +31,8 @@
     "typescript": "^5.5.0",
     "rimraf": "^5.0.0",
     "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

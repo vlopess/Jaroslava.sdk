@@ -1,6 +1,6 @@
 {
   "name": "@jaroslava/types",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Shared TypeScript types for the Jaroslava SDK: AST nodes, plugin contracts, diagnostics.",
   "license": "MIT",
   "type": "module",
@@ -13,7 +13,9 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
@@ -23,5 +25,8 @@
   "devDependencies": {
     "typescript": "^5.5.0",
     "rimraf": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

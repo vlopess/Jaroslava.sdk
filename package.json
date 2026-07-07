@@ -1,6 +1,10 @@
 {
   "name": "jaroslava-sdk",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlopess/Jaroslava.sdk"
+  },
   "private": false,
   "description": "Monorepo for the Jaroslava SDK — parsing, transforming, validating, serializing and rendering the Jaroslava markup language.",
   "license": "MIT",
